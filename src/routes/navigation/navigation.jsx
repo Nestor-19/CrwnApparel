@@ -4,9 +4,9 @@ import { Outlet, Link } from 'react-router-dom';
 
 import { ReactComponent as CrwnLogo } from '../../assets/crown.svg';
 
-import './Navbar.styles.scss';
+import './navigation.styles.scss';
 
-const Navbar = () => {
+const Navigation = () => {
   return (
     <Fragment>
       <div className='navigation'>
@@ -27,4 +27,4 @@ const Navbar = () => {
   );
 };
 
-export default Navbar;
+export default Navigation;
