@@ -3,10 +3,9 @@ import ProductCard from '../ProductCard/ProductCard';
 import './CategoryPreview.styles.scss';
 
 const CategoryPreview = ({ title, products }) => {
-  const path = `/shop/${title}`
   return (
     <div className='category-preview-container'>
-      <Link to={path}>
+      <Link to={title}>
         <h2>
             <span className='title'>{title.toUpperCase()}</span>
         </h2>
