@@ -16,8 +16,14 @@ const App = () => {
     const unsubscribe = onAuthStateChangedListener((user) => {
         if (user) {
             createUserDocument(user);
+            const serializedUser = {
+              uid: user.uid,
+              email: user.email,
+            };
+            dispatch(setCurrentUser(serializedUser));
+        } else {
+          dispatch(setCurrentUser(null));
         }
-        dispatch(setCurrentUser(user));
     })
     
     // Cleanup subscription on unmount

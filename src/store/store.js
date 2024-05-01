@@ -1,21 +1,14 @@
-import { compose, applyMiddleware } from 'redux';
-import { configureStore } from "@reduxjs/toolkit";
+import { configureStore, Tuple } from "@reduxjs/toolkit";
 import logger from 'redux-logger';
-
 import { rootReducer } from './rootReducer';
 
-const middleWares = [process.env.NODE_ENV === 'development' && logger].filter(
-  Boolean
-);
-
-const composedEnhancers = compose(applyMiddleware(...middleWares));
+const middlewares = [logger];
 
 export const store = configureStore({
-    reducer: rootReducer, 
-    composedEnhancers
+  reducer: rootReducer,
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(middlewares),
+  devTools: process.env.NODE_ENV !== 'production',
 });
-
-// export const store = createStore(rootReducer, undefined, composedEnhancers);
 
 
 
