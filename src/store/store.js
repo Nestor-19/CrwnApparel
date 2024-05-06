@@ -1,4 +1,4 @@
-import { configureStore, Tuple } from "@reduxjs/toolkit";
+import { configureStore } from "@reduxjs/toolkit";
 import {persistStore, persistReducer} from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import logger from 'redux-logger';
@@ -9,13 +9,18 @@ const middlewares = [logger];
 const persistConfig = {
   key: 'root',
   storage,
+  blacklist: ['user']
 }
 
+const persistedReducer = persistReducer(persistConfig, rootReducer);
+
 export const store = configureStore({
-  reducer: rootReducer,
-  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(middlewares),
+  reducer: persistedReducer,
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware({serializableCheck: false}).concat(middlewares),
   devTools: process.env.NODE_ENV !== 'production',
 });
+
+export const persistor = persistStore(store);
 
 
 
