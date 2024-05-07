@@ -5,30 +5,15 @@ import Authentication from "./routes/authentication/authentication";
 import Shop from "./routes/shop/shop";
 import Checkout from "./routes/checkout/checkout";
 import { useEffect } from "react";
-import { createUserDocument, onAuthStateChangedListener } from "./utils/firebase/firebase";
-import { setCurrentUser } from "./store/user/userAction";
+import { checkUserSession } from "./store/user/userAction";
 import { useDispatch } from "react-redux";
 
 const App = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChangedListener((user) => {
-        if (user) {
-            createUserDocument(user);
-            const serializedUser = {
-              uid: user.uid,
-              email: user.email,
-            };
-            dispatch(setCurrentUser(serializedUser));
-        } else {
-          dispatch(setCurrentUser(null));
-        }
-    })
-    
-    // Cleanup subscription on unmount
-    return unsubscribe;
-  }, [dispatch])
+    dispatch(checkUserSession);
+  }, [])
 
   return (
     <Routes>

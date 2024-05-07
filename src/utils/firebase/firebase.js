@@ -66,7 +66,7 @@ const firebaseConfig = {
       }
     }
 
-    return userDocRef;
+    return userSnapshot;
   }
 
   export const createUserWithEmailAndPass = async (email, password) => {
@@ -82,8 +82,6 @@ const firebaseConfig = {
   }
 
   export const signOutUser = async () => signOut(auth);
-
-  export const onAuthStateChangedListener = (callback) => onAuthStateChanged(auth, callback);
 
   export const addCollectionAndDocuments = async (collectionKey, objectsToAdd) => {
     const collectionRef = collection(db, collectionKey);
@@ -110,4 +108,17 @@ const firebaseConfig = {
     }, {})
 
     return categoryMap;
+  }
+
+  export const getCurrentUser = () => {
+    return new Promise((resolve, reject) => {
+      const unsubscribe = onAuthStateChanged(
+        auth,
+        (userAuth) => {
+          unsubscribe();
+          resolve(userAuth);
+        },
+        reject
+      )
+    })
   }
