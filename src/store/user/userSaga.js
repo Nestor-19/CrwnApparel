@@ -7,8 +7,6 @@ import { getCurrentUser, createUserDocument, signInWithGooglePopUp, signInWithEm
 export function* getUserSnapShot(userAuth, additionalInfo) {
     try {
         const userSnapshot = yield call(createUserDocument, userAuth, additionalInfo);
-        console.log(userSnapshot);
-        console.log(userSnapshot.data());
         yield put(signInSuccess({id: userSnapshot.id, ...userSnapshot.data()}))
     } catch(error) {
         yield put(signInFail(error));
