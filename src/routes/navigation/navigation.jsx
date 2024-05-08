@@ -3,7 +3,6 @@ import { Outlet, Link } from "react-router-dom";
 import { Fragment } from "react";
 import {ReactComponent as CrownLogo} from '../../assets/crown.svg'
 import './navigation.styles.scss'
-import { signOutUser } from "../../utils/firebase/firebase";
 import CartIcon from "../../components/CartIcon/CartIcon";
 import DropDown from "../../components/DropDown/DropDown";
 import { useDispatch, useSelector } from "react-redux";
