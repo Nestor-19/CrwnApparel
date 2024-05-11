@@ -5,20 +5,15 @@ import {ReactComponent as CrownLogo} from '../../assets/crown.svg'
 import './navigation.styles.scss'
 import CartIcon from "../../components/CartIcon/CartIcon";
 import DropDown from "../../components/DropDown/DropDown";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { selectCurrentUser } from "../../store/user/userSelector";
 import { selectIsCartOpen } from "../../store/cart/cartSelector";
-import { signOut } from "../../store/user/userAction";
+import { signOutUser } from "../../utils/firebase/firebase";
 
 
 const NavBar = () => {
-    const dispatch = useDispatch();
     const currentUser = useSelector(selectCurrentUser)
     const isCartOpen = useSelector(selectIsCartOpen)
-
-    const handleSignOut = () => {
-      dispatch(signOut());
-    }
 
     return (
     <Fragment>
@@ -31,7 +26,7 @@ const NavBar = () => {
                 SHOP
             </Link>
             {currentUser
-                ? <span className="nav-link" onClick={handleSignOut}>SIGN OUT</span>
+                ? <span className="nav-link" onClick={signOutUser}>SIGN OUT</span>
                 : <Link className="nav-link" to="/auth">
                     SIGN IN
                   </Link>  

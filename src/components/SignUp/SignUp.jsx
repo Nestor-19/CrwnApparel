@@ -3,7 +3,7 @@ import './SignUp.styles.scss';
 import FormInput from "../FormInput/FormInput";
 import Button from "../Button/Button";
 import { useDispatch } from "react-redux";
-import { signUp } from "../../store/user/userAction";
+import { createUserWithEmailAndPass,  createUserDocument} from "../../utils/firebase/firebase";
 
 const defaultFormFields = {
     displayName: '',
@@ -26,8 +26,15 @@ const SignUpForm = () => {
         } 
 
         try {
-            dispatch(signUp(email, password, displayName));
-            resetFormFields();
+            // dispatch(signUp(email, password, displayName));
+            // resetFormFields();
+            const { user } = await createUserWithEmailAndPass(
+                email,
+                password
+              );
+        
+              await createUserDocument(user, { displayName });
+              resetFormFields();
         } catch (error) {
             if (error.code === 'auth/email-already-in-use') {
                 alert('Cannot create user with existing email');

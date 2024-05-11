@@ -3,7 +3,7 @@ import './SignIn.styles.scss';
 import FormInput from "../FormInput/FormInput";
 import Button from "../Button/Button";
 import { useDispatch } from "react-redux";
-import { googleSignIn, emailSignIn } from "../../store/user/userAction";
+import { signInWithEmailAndPass, signInWithGooglePopUp } from "../../utils/firebase/firebase";
 
 const defaultFormFields = {
     email: '',
@@ -19,7 +19,7 @@ const SignInForm = () => {
         event.preventDefault();
 
         try {
-            dispatch(emailSignIn(email, password));
+            await signInWithEmailAndPass(email, password);
             resetFormFields();
         } catch (error) {
             switch (error.code) {
@@ -33,7 +33,7 @@ const SignInForm = () => {
     }
 
     const signInWithGoogle = async () => {
-        dispatch(googleSignIn());
+        await signInWithGooglePopUp();
     }
 
     const resetFormFields = () => {
