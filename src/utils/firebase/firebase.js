@@ -110,18 +110,5 @@ const firebaseConfig = {
     return categoryMap;
   }
 
-// export const getCurrentUser = () => {
-  // return new Promise((resolve, reject) => {
-    // const unsubscribe = onAuthStateChanged(
-      // auth,
-      // (userAuth) => {
-        // unsubscribe();
-        // resolve(userAuth);
-      // },
-      // reject
-    // );
-  // });
-// };
-
 export const onAuthStateChangedListener = (callback) =>
   onAuthStateChanged(auth, callback);
