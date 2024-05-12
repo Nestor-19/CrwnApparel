@@ -1,6 +1,6 @@
 import {Routes, Route} from 'react-router-dom';
-import CategoriesPreview from '../CategoriesPreview/CategoriesPreview';
-import Category from '../Category/Category';
+import CategoriesPreview from '../categoriesPreview/categoriesPreview';
+import Category from '../category/category';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import {setCategories} from '../../store/categories/categoriesSlice';

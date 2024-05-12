@@ -1,4 +1,4 @@
-import './Category.styles.scss';
+import './category.styles.scss';
 import { useParams } from 'react-router-dom';
 import { Fragment, useEffect, useState } from 'react';
 import ProductCard from '../../components/ProductCard/ProductCard';

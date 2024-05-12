@@ -10,7 +10,6 @@ const BUTTON_TYPE_CLASSES = {
     // based on the buttonType prop passed into this component
     google: 'google-sign-in',
     inverted: 'inverted',
-
 }
 
 const Button = ({ children, buttonType, ...otherProps }) => {
