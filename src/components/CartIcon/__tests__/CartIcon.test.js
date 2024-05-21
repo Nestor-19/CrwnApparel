@@ -5,7 +5,8 @@ import { renderWithProviders } from "../../../utils/test/testUtils";
 describe('Cart Icon tests', () => {
     test('Use preloaded state to render', () => {
         const initialCartItems = [
-            {id: 1, name: 'Test Item', imageUrl: 'test', price: 12, quantity: 3}
+            {id: 1, name: 'Test Item 1', imageUrl: 'image 1', price: 12, quantity: 3},
+            {id: 2, name: 'Test Item 2', imageUrl: 'image 2', price: 15, quantity: 2},
         ]
 
         renderWithProviders(<CartIcon />, {
@@ -17,7 +18,7 @@ describe('Cart Icon tests', () => {
             },
         })
 
-        const cartIconElement = screen.getByText('3');
+        const cartIconElement = screen.getByText('5');
         expect(cartIconElement).toBeInTheDocument();
     })
 })
