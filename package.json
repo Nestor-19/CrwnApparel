@@ -24,6 +24,7 @@
     "reselect": "^5.1.0",
     "sass": "^1.71.1",
     "stripe": "^15.6.0",
+    "util": "^0.12.5",
     "web-vitals": "2.1.4"
   },
   "scripts": {
