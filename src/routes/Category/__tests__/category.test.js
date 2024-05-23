@@ -24,17 +24,25 @@ describe('Category test', () => {
         expect(spinnerElement).toBeInTheDocument();
     })
 
-    test('Do not render Spinner if isLoading is false', () => {
+    test('Render products in a category if isLoading is false', () => {
         renderWithProviders(<Category />, {
             preloadedState: {
                 categories: {
                     isLoading: false,
-                    categoriesMap: {}
+                    categoriesMap: {
+                        mens: [
+                            {id: 1, imageUrl: 'testUrl1', name: 'testItem1', price: 25},
+                            {id: 2, imageUrl: 'testUrl2', name: 'testItem2', price: 12}
+                        ]
+                    }
                 }
             }
         })
 
         const spinnerElement = screen.queryByTestId('spinner');
         expect(spinnerElement).toBeNull();
+
+        const testItem1Element = screen.getByText(/testItem1/i);
+        expect(testItem1Element).toBeInTheDocument();
     })
 })
