@@ -33,21 +33,18 @@ describe('Navigation tests', () => {
     })
 
     test('Render Cart DropDown if isCartOpen is true', () => {
-        const initialCartItems = [
-            {id: 1, name: 'Test Item 1', imageUrl: 'image 1', price: 12, quantity: 3},
-        ]
         renderWithProviders(<NavBar />, {
             preloadedState: {
                 cart: {
                     isCartOpen: true,
-                    cartItems: initialCartItems
+                    cartItems: []
                     
                 }
             }
         })
 
-        const checkoutButtonElement = screen.getByText(/go to checkout/i);
-        expect(checkoutButtonElement).toBeInTheDocument();
+        const emptyCartTextElement = screen.getByText(/your cart is empty/i);
+        expect(emptyCartTextElement).toBeInTheDocument();
     })
 
     test('Do not Render Cart DropDown if isCartOpen is false', () => {

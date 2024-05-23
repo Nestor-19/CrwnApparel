@@ -23,9 +23,15 @@
       overflow: scroll;
       font-size: 13px;
     }
+
+    .cart-empty-text {
+      display: flex;
+      justify-content: center;
+      margin-top: 110px;
+    }
   
     button {
       margin-top: auto;
-      // font-size: 13px;
+      margin-left: 13px;
     }
   }
