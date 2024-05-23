@@ -31,4 +31,39 @@ describe('Navigation tests', () => {
         const signInElement = screen.queryByText(/sign in/i);
         expect(signInElement).toBeNull();
     })
+
+    test('Render Cart DropDown if isCartOpen is true', () => {
+        const initialCartItems = [
+            {id: 1, name: 'Test Item 1', imageUrl: 'image 1', price: 12, quantity: 3},
+        ]
+        renderWithProviders(<NavBar />, {
+            preloadedState: {
+                cart: {
+                    isCartOpen: true,
+                    cartItems: initialCartItems
+                    
+                }
+            }
+        })
+
+        const checkoutButtonElement = screen.getByText(/go to checkout/i);
+        expect(checkoutButtonElement).toBeInTheDocument();
+    })
+
+    test('Do not Render Cart DropDown if isCartOpen is false', () => {
+        const initialCartItems = [
+            {id: 1, name: 'Test Item 1', imageUrl: 'image 1', price: 12, quantity: 3}
+        ]
+        renderWithProviders(<NavBar />, {
+            preloadedState: {
+                cart: {
+                    isCartOpen: false,
+                    cartItems: initialCartItems
+                    
+                }
+            }
+        })
+        const checkoutButtonElement = screen.queryByText(/go to checkout/i);
+        expect(checkoutButtonElement).toBeNull();
+    })
 }) 
