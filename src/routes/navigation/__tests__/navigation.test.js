@@ -65,7 +65,7 @@ describe('Navigation tests', () => {
         expect(checkoutButtonElement).toBeNull();
     })
 
-    test('Should trigger SignOutUser when SignOut link is clicked', async () => {
+    test('Trigger SignOutUser when SignOut link is clicked', async () => {
         const signOutUserSpy = jest.spyOn(firebase, 'signOutUser').mockResolvedValue();
 
         renderWithProviders(<NavBar />, {
