@@ -1,6 +1,7 @@
-import { screen } from "@testing-library/react";
+import { screen, fireEvent } from "@testing-library/react";
 import { renderWithProviders } from "../../../utils/test/testUtils";
 import NavBar from "../navigation";
+import * as firebase from "../../../utils/firebase/firebase";
 
 describe('Navigation tests', () => {
     test('Render Sign In link if currentUser does not exist', () => {
@@ -63,4 +64,24 @@ describe('Navigation tests', () => {
         const checkoutButtonElement = screen.queryByText(/go to checkout/i);
         expect(checkoutButtonElement).toBeNull();
     })
+
+    test('Should trigger SignOutUser when SignOut link is clicked', async () => {
+        const signOutUserSpy = jest.spyOn(firebase, 'signOutUser').mockResolvedValue();
+
+        renderWithProviders(<NavBar />, {
+          preloadedState: {
+            user: {
+              currentUser: {},
+            },
+          },
+        });
+    
+        expect(screen.getByText('SIGN OUT')).toBeInTheDocument();
+    
+        await fireEvent.click(screen.getByText('SIGN OUT'));
+        
+        expect(signOutUserSpy).toHaveBeenCalled();
+
+        signOutUserSpy.mockClear();
+    });
 }) 
